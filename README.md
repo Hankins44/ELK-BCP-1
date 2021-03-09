@@ -6,10 +6,8 @@ The files in this repository were used to configure the network depicted below.
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the YAML playbook file may be used to install only certain pieces of it, such as Filebeat.
 
-  - _TODO: Enter the playbook file._
-
 This document contains the following details:
-- Description of the Topologu
+- Description of the Topology
 - Access Policies
 - ELK Configuration
   - Beats in Use
@@ -21,40 +19,48 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly available, in addition to restricting traffic to the network. Load balancing helps to maintain 
+the availability of our web application, the third aspect of the CIA triad. On the other hand we use the jump box provisioner to simplify the task of administering
+our three web servers by utilizing a single .yml file to configure all three at the same time. This not only ensures that they are all identical, but also makes sure we only have to run the playbook once.
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system traffic.
+What does Filebeat watch for?
+Filebeat looks at specific logs and locations we specify and forwards them to logstash and elasticsearch for further analysis, filebeat data can also be aggregated and 
+vizualized in kibana.
+
+What does Metricbeat record?
+Metricbeat functions similarly to filebeat. The difference is rather than being focused on logs metricbeat focuses on system and application/service metrics and statistics. Like 
+filebeat it forwards these to logstash and elasticsearch and can be vizualized in Kibana.
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
-|----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| Name       | Function       | IP Address | Operating System |
+|------------|----------------|------------|------------------|
+| Jump Box   | Gateway        | 10.0.0.4   | Linux            |
+| Web-1      | Webserver      | 10.0.0.7   | Linux            |
+| Web-2      | Webserver      | 10.0.0.8   | Linux            |
+| Web-3      | Webserver      | 10.0.0.9   | Linux            |
+| ELK-Server | ELK monitoring | 10.1.0.4   | Linux            |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the Jump Box Provisioner machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+- My Personal Home IP
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by SSH.
+The ELK VM was accessible via the Jump Box IP 10.0.0.4 via SSH, but also via HTTP from my personal IP over port 5601
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name       | Publicly Accessible? | Allowed IP Address            |
+|------------|----------------------|-------------------------------|
+| Jump Box   | yes                  | Personal IP                   |
+| Web-1      | via Load Balancer    | LB: 40.87.97.170 JB: 10.0.0.4 |
+| Web-2      | via Load Balancer    | LB: 40.87.97.170 JB: 10.0.0.4 |
+| Web-3      | via Load Balancer    | LB: 40.87.97.170 JB: 10.0.0.4 |
+| ELK-Server | yes                  | Personal IP JB: 10.0.0.4      |
 
 ### Elk Configuration
 
