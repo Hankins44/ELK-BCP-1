@@ -104,4 +104,5 @@ SSH into the control node and follow the steps below:
 - Run the playbook, and navigate to http://'ELK-Server-Public-IP':5601/app/kibana to check that the installation worked as expected.
 
 You will need to run the following commands to download the playbook, update the files, etc. :
-  * 
+  * curl -LO https://raw.githubusercontent.com/Hankins44/ELK-BCP-1/main/Ansible/elk-playbook.yml  _<-Downloads the playbook_
+
