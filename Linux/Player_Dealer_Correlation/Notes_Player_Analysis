@@ -1,0 +1,10 @@
+02:00:00 PM
+05:00:00 AM
+08:00:00 AM
+08:00:00 PM
+11:00:00 PM
+obtained using: cat Roulette_Losses | awk -F  {print , } | awk -Fdata: {print } | sort -n | uniq -d | cat >> Notes_Player_Analysis
+MylieSchmidt
+obtained using: cat Roulette_Losses  | cut -c 48- | sed -e s/^[ t]*// | tr -d   | tr , n | sort | uniq -d >> Notes_Player_Analysis
+12
+Obtained using: cat Roulette_Losses  | cut -c 48- | sed -e s/^[ t]*// | tr -d   | tr , n | sort | uniq -c | sort -nr | sed -n 1p | awk {print } | cat >> Notes_Player_Analysis

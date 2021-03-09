@@ -1,0 +1,4 @@
+Billy Jones
+     15 Billy Jones
+obtained using: cat *_Dealer_schedule | grep -E 11.*PM | tr t   | awk -F  {print ,,,} | uniq -d | cat >> Dealers_working_during_losses
+obtained using: cat *_Dealer_schedule | grep -E *.*M | tr t   | awk -F  {print ,} | sort | uniq -c | sort -nr | sed -n 1p | cat >> Notes_Dealer_Analysis
