@@ -105,4 +105,6 @@ SSH into the control node and follow the steps below:
 
 You will need to run the following commands to download the playbook, update the files, etc. :
   * curl -LO https://raw.githubusercontent.com/Hankins44/ELK-BCP-1/main/Ansible/elk-playbook.yml  _<-Downloads the playbook_
+  * nano /etc/ansible/hosts _<-Opens the hosts file, add the hostname [example] with the ip and path to python3 beneath as shown above_
+  * ansible-playbook elk-playbook.yml _<-runs the ELK playbook
 
